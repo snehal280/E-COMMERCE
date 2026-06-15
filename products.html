@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - ShoesHub</title>
+    <style>
+        /* Basic styling for the product page */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        header .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        /* Product Section Styling */
+        .product-section {
+            padding: 50px 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            grid-gap: 20px;
+            justify-content: center;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 380px; 
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain; 
+            border-radius: 8px;
+        }
+
+        .product button {
+            background-color: #111;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 0px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #333;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .footer-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer .footer-links li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        footer .footer-links li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer .footer-links li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 768px) {
+            .product-section {
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-section {
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">ShoesHub</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="login.html">Login</a></li>
+                <!-- <li><a href="registration.html">Registration</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Category Dropdown Section -->
+    <section style="padding: 20px;">
+        <label for="category">Choose a Category:</label>
+        <select id="category" name="category" onchange="filterProducts()">
+            <option value="all">All</option>
+            <option value="sports">Sports Shoes</option>
+            <option value="sneakers">Sneakers</option>
+            <option value="casual">Casual Shoes</option>
+            <option value="boots">Boots</option>
+        </select>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section" id="product-list">
+        <!-- Product 1 -->
+        <div class="product" data-category="casual">
+            <img src="https://www.superkicks.in/cdn/shop/files/1_37aa8bd3-ef71-4cfb-8b19-139a61382f94.jpg?v=1719561845&width=493" alt="Nike Air Max">
+            <h3>Nike Air Max</h3>
+            <p>$150</p>
+            <button onclick="addToCart('Nike Air Max', 150, 'https://www.superkicks.in/cdn/shop/files/1_37aa8bd3-ef71-4cfb-8b19-139a61382f94.jpg?v=1719561845&width=493')">Add to Cart</button>
+        </div>
+        <!-- Product 17 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://cdn.shopify.com/s/files/1/0863/7906/9713/articles/celine_ss24-cr-02-sneakers.jpg?v=1714364432&width=2000&height=1500&crop=center" alt="Celine's CR-02">
+            <h3>Celine's CR-02</h3>
+            <p>$349</p>
+            <button onclick="addToCart('Celine CR-02', 349, 'https://cdn.shopify.com/s/files/1/0863/7906/9713/articles/celine_ss24-cr-02-sneakers.jpg?v=1714364432&width=2000&height=1500&crop=center')">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product" data-category="casual">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20241129/Pe3L/6749907a0f47f80c87b90dd5/-473Wx593H-700190648-green-MODEL.jpg" alt="Puma RS-X">
+            <h4>Puma RS-X</h4>
+            <p>$120</p>
+            <button onclick="addToCart('Puma RS-X', 120, 'https://assets.ajio.com/medias/sys_master/root/20241129/Pe3L/6749907a0f47f80c87b90dd5/-473Wx593H-700190648-green-MODEL.jpg')">Add to Cart</button>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product" data-category="casual">
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQxvtQlIbqoOKKOof0sfxmeO5b_XWVmcwijMe9zBPvNae6_rmX-_DOGwPYwkTQjsXQTMgIZmu28q9XqNlk7q3kleQJ5OKfCQScMn-U_vcbIgkyD_RDh7Dei&usqp=CAE" alt="Calvin Klein">
+            <h3>Calvin Klein</h3>
+            <p>$200</p>
+            <button onclick="addToCart('Calvin Klein', 200, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQxvtQlIbqoOKKOof0sfxmeO5b_XWVmcwijMe9zBPvNae6_rmX-_DOGwPYwkTQjsXQTMgIZmu28q9XqNlk7q3kleQJ5OKfCQScMn-U_vcbIgkyD_RDh7Dei&usqp=CAE')">Add to Cart</button>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://img.tatacliq.com/images/i22//437Wx649H/MP000000025108443_437Wx649H_202501230200451.jpeg" alt="Ginger">
+            <h3>Ginger</h3>
+            <p>$50</p>
+            <button onclick="addToCart('Ginger', 50, 'https://img.tatacliq.com/images/i22//437Wx649H/MP000000025108443_437Wx649H_202501230200451.jpeg')">Add to Cart</button>
+        </div>
+        
+        <!-- Product 6 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://londonkelly.com.hk/cdn/shop/products/gucci-womens-ace-embroidered-platform-sneaker-white-900746.jpg?v=1684111884&width=500" alt="Gucci">
+            <h3>Gucci</h3>
+            <p>$350</p>
+            <button onclick="addToCart('Gucci', 350, 'https://londonkelly.com.hk/cdn/shop/products/gucci-womens-ace-embroidered-platform-sneaker-white-900746.jpg?v=1684111884&width=500')">Add to Cart</button>
+        </div>
+        <!-- Product 7 -->
+        <div class="product" data-category="sports">
+            <img src="https://m.media-amazon.com/images/S/aplus-media/sota/38ba92cc-6d78-4da5-8eab-e7bf293c1cf8._SL300__.jpg" alt="ASIAN Mens">
+            <h3>ASIAN Mens</h3>
+            <p>$40</p>
+            <button onclick="addToCart('ASIAN Mens', 40, 'https://m.media-amazon.com/images/S/aplus-media/sota/38ba92cc-6d78-4da5-8eab-e7bf293c1cf8._SL300__.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 8 -->
+        <div class="product" data-category="sports">
+            <img src="https://m.media-amazon.com/images/I/61VHvg7wvCL._SY695_.jpg" alt="BRUTON Mens Sport Shoes">
+            <h3>BRUTON Men's Sport Shoes</h3>
+            <p>$60</p>
+            <button onclick="addToCart('BRUTON Mens Sport Shoes', 60, 'https://m.media-amazon.com/images/I/61VHvg7wvCL._SY695_.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 21 -->
+        <div class="product" data-category="boots">
+            <img src="https://stylestryproductionwls47sou4z.cdn.e2enetworks.net/images/products/medium/6753df3e2ba910ef5d2572508b740526a3e232bb.webp" alt="Shoetopia">
+            <h3>Shoetopia</h3>
+            <p>$60</p>
+            <button onclick="addToCart('Shoetopia', 85, 'https://stylestryproductionwls47sou4z.cdn.e2enetworks.net/images/products/medium/6753df3e2ba910ef5d2572508b740526a3e232bb.webp')">Add to Cart</button>
+        </div>
+        <!-- Product 9 -->
+        <div class="product" data-category="sports">
+            <img src="https://m.media-amazon.com/images/I/71u-u3tG3fL._SY695_.jpg" alt="Campus Men's North Running Shoe">
+            <h3>Campus Men's North Running Shoe</h3>
+            <p>$30</p>
+            <button onclick="addToCart('Campus Mens North Running Shoe', 30, 'https://m.media-amazon.com/images/I/71u-u3tG3fL._SY695_.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 10 -->
+        <div class="product" data-category="casual">
+            <img src="https://m.media-amazon.com/images/I/81ibIf38QML._SY695_.jpg" alt="ASIAN Men's Casual">
+            <h3>ASIAN Men's Casual</h3>
+            <p>$130</p>
+            <button onclick="addToCart('ASIAN Mens Casual', 130, 'https://m.media-amazon.com/images/I/81ibIf38QML._SY695_.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 11 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://m.media-amazon.com/images/I/81+MtloLwYL._SX695_.jpg" alt="Power">
+            <h3>Power</h3>
+            <p>$140</p>
+            <button onclick="addToCart('Power', 140, 'https://m.media-amazon.com/images/I/81+MtloLwYL._SX695_.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 12 -->
+        <div class="product" data-category="sports">
+            <img src="https://m.media-amazon.com/images/I/71S3WT4rjAL._SX695_.jpg" alt="Power Mens Brett Casual Shoes">
+            <h3>Power Mens Brett Casual Shoes</h3>
+            <p>$29</p>
+            <button onclick="addToCart('Power Mens Brett Casual Shoes', 29, 'https://m.media-amazon.com/images/I/71S3WT4rjAL._SX695_.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 13 -->
+        <div class="product" data-category="sports">
+            <img src="https://images-cdn.ubuy.co.in/65741cc8aeb943570e6318cf-finotar-men-running-shoes-lightweight.jpg" alt="Air Mens">
+            <h3>Air Mens</h3>
+            <p>$19</p>
+            <button onclick="addToCart('Air Mens', 19, 'https://images-cdn.ubuy.co.in/65741cc8aeb943570e6318cf-finotar-men-running-shoes-lightweight.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 14 -->
+        <div class="product" data-category="casual">
+            <img src="https://img.tatacliq.com/images/i20//437Wx649H/MP000000023725235_437Wx649H_202409200920091.jpeg" alt="Red Tape">
+            <h3>Red Tape</h3>
+            <p>$89</p>
+            <button onclick="addToCart('Red Tape', 89, 'https://img.tatacliq.com/images/i20//437Wx649H/MP000000023725235_437Wx649H_202409200920091.jpeg')">Add to Cart</button>
+        </div>
+        <!-- Product 15 -->
+        <div class="product" data-category="casual">
+            <img src="https://shopsydneys.com/cdn/shop/products/StudioSession-071.jpg?v=1603993622&width=1080" alt="SYNDNEY'S">
+            <h3>SYDNEY'S</h3>
+            <p>$189</p>
+            <button onclick="addToCart('SYDNEYS', 189, 'https://shopsydneys.com/cdn/shop/products/StudioSession-071.jpg?v=1603993622&width=1080')">Add to Cart</button>
+        </div>
+        <!-- Product 22 -->
+        <div class="product" data-category="boots">
+            <img src="https://images-cdn.ubuy.co.in/6542b9a384982648893de91d-okbop-women-s-low-heeled-ankle.jpg" alt="OKBOP">
+            <h3>OKBOP</h3>
+            <p>$58</p>
+            <button onclick="addToCart('OKBOP', 85, 'https://images-cdn.ubuy.co.in/6542b9a384982648893de91d-okbop-women-s-low-heeled-ankle.jpg')">Add to Cart</button>
+        </div>
+        <!-- Product 16 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://www.jiomart.com/images/product/original/rvqqzffrxv/flynce-sneakers-for-wome-embellished-premium-casual-high-ankle-sneakers-ankle-boots-shoe-chunky-ankle-length-sneakers-shoes-for-women-and-girls-product-images-rvqqzffrxv-0-202302010108.jpg?im=Resize=(600,750)" alt="FLYNCE">
+            <h3>FLYNCE</h3>
+            <p>$289</p>
+            <button onclick="addToCart('FLYNCE', 289, 'https://www.jiomart.com/images/product/original/rvqqzffrxv/flynce-sneakers-for-wome-embellished-premium-casual-high-ankle-sneakers-ankle-boots-shoe-chunky-ankle-length-sneakers-shoes-for-women-and-girls-product-images-rvqqzffrxv-0-202302010108.jpg?im=Resize=(600,750)')">Add to Cart</button>
+        </div>
+        <!-- Product 18 -->
+        <div class="product" data-category="sneakers">
+            <img src="https://image.menswearhouse.com/is/image/TMW/TMW_42GB_29_BEN_SHERMAN_ATHLETIC_WHITENAVY_MAIN?$browse_thumbnail$&imPolicy=pgp-sm" alt="Ben-Sherman">
+            <h3>Ben-Sherman</h3>
+            <p>$110</p>
+            <button onclick="addToCart('Ben-Sherman', 110, 'https://image.menswearhouse.com/is/image/TMW/TMW_42GB_29_BEN_SHERMAN_ATHLETIC_WHITENAVY_MAIN?$browse_thumbnail$&imPolicy=pgp-sm')">Add to Cart</button>
+        </div>
+        <!-- Product 24 -->
+        <div class="product" data-category="boots">
+            <img src="https://stylestryproductionwls47sou4z.cdn.e2enetworks.net/images/products/medium/667b86f0a3a98251c757afb511dcf4006b4ba73d.webp" alt="Stylestry">
+            <h3>Stylestry</h3>
+            <p>$199</p>
+            <button onclick="addToCart('Stylestry', 199, 'https://stylestryproductionwls47sou4z.cdn.e2enetworks.net/images/products/medium/667b86f0a3a98251c757afb511dcf4006b4ba73d.webp')">Add to Cart</button>
+        </div>
+        <!-- Product 19 -->
+        <div class="product" data-category="boots">
+            <img src="https://eridani.in/cdn/shop/files/Rhodes-Boots-1005-Black_1.jpg?v=1716299863&width=1200" alt="Rhodes Ankle-Length Boots">
+            <h3>Rhodes Ankle-Length Boots</h3>
+            <p>$92</p>
+            <button onclick="addToCart('Rhodes Ankle-Length Boots', 92, 'https://eridani.in/cdn/shop/files/Rhodes-Boots-1005-Black_1.jpg?v=1716299863&width=1200')">Add to Cart</button>
+        </div>
+        <!-- Product 20 -->
+        <div class="product" data-category="boots">
+            <img src="https://teakwoodleathers.com/cdn/shop/products/T_SH_TW_LB01_BL37_1_720x.jpg?v=1669031243" alt="Teakwood">
+            <h3>Teakwood</h3>
+            <p>$85</p>
+            <button onclick="addToCart('Teakwood', 85, 'https://teakwoodleathers.com/cdn/shop/products/T_SH_TW_LB01_BL37_1_720x.jpg?v=1669031243')">Add to Cart</button>
+        </div>
+        <!-- Product 23 -->
+        <div class="product" data-category="boots">
+            <img src="https://shop.mango.com/assets/rcs/pics/static/T7/fotos/S/77077933_78.jpg?imwidth=640&imdensity=1&ts=1722940953982" alt="MANGO Leather Boots">
+            <h3>MANGO Leather Boots</h3>
+            <p>$99</p>
+            <button onclick="addToCart('MANGO Leather Boots', 99, 'https://shop.mango.com/assets/rcs/pics/static/T7/fotos/S/77077933_78.jpg?imwidth=640&imdensity=1&ts=1722940953982')">Add to Cart</button>
+        </div>
+        <!-- Product 2 -->
+        <div class="product" data-category="sports">
+            <img src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/cc8933fd0c2b429c9073bedfc6bbf8dd_9366/Ultraboost_Light_Shoes_Blue_ID3276_HM1.jpg" alt="Adidas Ultraboost">
+            <h3>Adidas Ultraboost</h3>
+            <p>$180</p>
+            <button onclick="addToCart('Adidas Ultraboost', 180, 'https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/cc8933fd0c2b429c9073bedfc6bbf8dd_9366/Ultraboost_Light_Shoes_Blue_ID3276_HM1.jpg')">Add to Cart</button>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 ShoesHub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to add an item to the cart
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const item = { name, price, image };
+            cart.push(item);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Function to update the cart count in the header
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").textContent = cart.length;
+        }
+
+        // Function to filter products by category
+        function filterProducts() {
+            const category = document.getElementById("category").value;
+            const products = document.querySelectorAll(".product");
+            products.forEach(product => {
+                const productCategory = product.getAttribute("data-category");
+                if (category === "all" || category === productCategory) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        // Call updateCartCount on page load to reflect the current cart count
+        window.onload = updateCartCount;
+    </script>
+</body>
+</html>
+
+
+
+
+
+
